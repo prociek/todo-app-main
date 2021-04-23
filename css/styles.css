@@ -1,0 +1,63 @@
+/* FONT IMPORT */
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+
+/* VARIABLES */
+:root {
+  /* colors */
+  --primary-blue: hsl(220, 98%, 61%);
+  --primary-gradient: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  --background-body: hsl(236, 33%, 92%);
+  --background-elements: hsl(0, 0%, 98%);
+  --border-color: hsl(233, 11%, 84%);
+  --text-color: hsl(235, 19%, 35%);
+  --text-color-hover: hsl(235, 19%, 35%);
+  --text-color-disable: hsl(236, 9%, 61%);
+  /* background images */
+  --background-image-mobile: url("../images/bg-mobile-light.jpg");
+  --background-image-desktop: url("../images/bg-desktop-light.jpg");
+}
+/* Dark Theme variables */
+[data-theme="dark"] {
+  --background-body: hsl(235, 21%, 11%);
+  --background-elements: hsl(235, 24%, 19%);
+  --text-color: hsl(234, 39%, 85%);
+  --text-color-hover: hsl(236, 33%, 92%);
+  --border-color: hsl(234, 11%, 52%);
+  --text-color-disable: hsl(233, 14%, 35%);
+  --VeryDarkGrayishBlue: hsl(237, 14%, 26%);
+  /* background images */
+  --background-image-mobile: url("../images/bg-mobile-dark.jpg");
+  --background-image-desktop: url("../images/bg-desktop-dark.jpg");
+}
+/* RESET */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+ul {
+  list-style: none;
+}
+button {
+  border: none;
+  background-color: transparent;
+}
+/* GENERAL */
+body {
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+  background-image: var(--background-image-mobile);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-color: var(--background-body);
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}

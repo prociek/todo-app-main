@@ -1,36 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Todo app</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./normalize.css" />
+    <!-- cross-browsers consistency -->
+    <link rel="stylesheet" href="./css/styles.css" />
 
-  Todo
-
-  <!-- Add dynamic number --> items left
-
-  All
-  Active 
-  Completed
-
-  Clear Completed
-
-  Drag and drop to reorder list
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+    <title>Todo app</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__heading">Todo</h1>
+      <button class="header__button">
+        <img
+          class="header__icon"
+          src="./images/icon-sun.svg"
+          alt="icon sun"
+          aria-label="toggle dark mode"
+        />
+      </button>
+    </header>
+    <main class="main">
+      <form class="todo-form">
+        <button class="todo-form__btn-submit" type="submit"></button
+        ><input
+          class="todo-form__input"
+          placeholder="Create a new todo..."
+          type="text"
+        />
+      </form>
+      <ul class="todo-list">
+        <li class="todo-list__item">
+          <button class="todo-list__btn-check">
+            <img
+              class="todo-list__image"
+              src="./images/icon-check.svg"
+              alt="icon check"
+            />
+          </button>
+          <p class="todo-list__text">buy a car</p>
+          <button class="todo-list__btn-close">
+            <img src="./images/icon-cross.svg" alt="icon close" />
+          </button>
+        </li>
+      </ul>
+      <div class="todo-menu" role="menu">
+        <div class="todo-menu__itms-left">
+          <span id="amount">0</span> items left
+        </div>
+        <div class="todo-menu__filter">
+          <button id="select-all" class="btn-select">All</button
+          ><button id="select-active" class="btn-select">Active</button
+          ><button id="select-completed" class="btn-select">Completed</button>
+        </div>
+        <button id="clear-completed">Clear Completed</button>
+      </div>
+      <p class="drag-info">Drag and drop to reorder list</p>
+    </main>
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Tomasz Procko</a>.
+    </footer>
+  </body>
 </html>
