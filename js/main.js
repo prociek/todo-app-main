@@ -8,6 +8,10 @@
   const todoForm = document.querySelector(".todo-form");
   const itemsCountEl = document.getElementById("amount");
   const clearCompletedBtn = document.getElementById("clear-completed");
+  const selectBtns = document.querySelectorAll(".btn-select");
+  const filterAll = document.getElementById("select-all");
+  const filterActive = document.getElementById("select-active");
+  const filterCompleted = document.getElementById("select-completed");
 
   /* State */
   let todoListArray = [
@@ -22,6 +26,7 @@
       id: "1",
     },
   ];
+  let appliedFilter = "all";
 
   /* FUNCTIONS */
 
@@ -71,7 +76,7 @@
     return fragment;
   }
 
-  /* Add Todo functionality */
+  /* Add Todo */
   function addTodo(e) {
     e.preventDefault();
     if (e.target.children[1].value === "") return;
@@ -83,6 +88,7 @@
     todoListArray.push(item); /* updating state */
     todoList.appendChild(createItem(item));
     updateCount();
+    applayFilter();
     e.target.children[1].value = "";
   }
 
@@ -98,6 +104,7 @@
         });
         todoListArray[itemIndex].isCompleted = !todoListArray[itemIndex]
           .isCompleted;
+        applayFilter();
       }
     });
     updateCount();
@@ -140,6 +147,46 @@
     todoListArray = todoListArray.filter((todo) => !todo.isCompleted);
   }
 
+  /* Applay filter */
+  function applayFilter() {
+    const todos = Array.from(document.querySelectorAll(".todo-list__item"));
+
+    if (appliedFilter === "active") {
+      todos.forEach((el) => {
+        if (el.classList.contains("completed")) el.style.display = "none";
+        else el.style.display = "flex";
+      });
+    } else if (appliedFilter === "completed") {
+      todos.forEach((el) => {
+        if (el.classList.contains("completed")) el.style.display = "flex";
+        else el.style.display = "none";
+      });
+    } else {
+      todos.forEach((el) => {
+        el.style.display = "flex";
+      });
+    }
+  }
+
+  /* Handle filter */
+  function handleFilter(e) {
+    /* Remove active class from all buttons */
+    Array.from(selectBtns).forEach((btn) => btn.classList.remove("active"));
+    /* Add class active to clicked button */
+    e.target.classList.add("active");
+
+    if (e.target.id === "select-active") {
+      appliedFilter = "active";
+      applayFilter();
+    } else if (e.target.id === "select-completed") {
+      appliedFilter = "completed";
+      applayFilter();
+    } else {
+      appliedFilter = "all";
+      applayFilter();
+    }
+  }
+
   /* Initialization */
   window.onload = function () {
     todoList.replaceChild(
@@ -158,4 +205,8 @@
   todoList.addEventListener("click", handleItemClick);
   /* Clear Completed Todos */
   clearCompletedBtn.addEventListener("click", handleClearCompleted);
+  /* Applay filte */
+  filterAll.addEventListener("click", handleFilter);
+  filterActive.addEventListener("click", handleFilter);
+  filterCompleted.addEventListener("click", handleFilter);
 })();
