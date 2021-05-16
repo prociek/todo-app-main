@@ -23,7 +23,7 @@
   /* border */
   --border-radius: 0.5rem;
   /* box-shadow */
-  --box-shadow: 0 3rem 3rem var(--border-color);
+  --box-shadow: 0 2rem 2rem hsla(0, 100%, 0%, 0.1);
 }
 /* Dark Theme variables */
 [data-theme="dark"] {

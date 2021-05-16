@@ -2,9 +2,10 @@
   /* GRABING ALL ELEMENTS INTO VARIABLES */
   const toggleModeBtn = document.querySelector(".header__button");
   const todoList = document.querySelector(".todo-list");
-  const initialItem = document.querySelector(
-    ".todo-list__item"
-  ); /* needed to clone node to not create complet element from scratch */
+  const initialItem =
+    document.querySelector(
+      ".todo-list__item"
+    ); /* needed to clone node to not create complet element from scratch */
   const todoForm = document.querySelector(".todo-form");
   const itemsCountEl = document.getElementById("amount");
   const clearCompletedBtn = document.getElementById("clear-completed");
@@ -56,6 +57,24 @@
     }
   }
 
+  /* Determine before element for place dragging element*/
+  function getElementBefore(container, y) {
+    const elements = [...container.querySelectorAll(".todo-list__item")];
+    let elBefore = [];
+    elements.forEach((el) => {
+      let offset =
+        y -
+        el.getBoundingClientRect().y -
+        el.getBoundingClientRect().height / 2;
+      if (offset < 0) {
+        elBefore.push(el);
+      }
+    });
+    if (elBefore.length > 0) {
+      return elBefore[0];
+    }
+  }
+
   /* Create list item element */
   function createItem(el) {
     let item = initialItem.cloneNode(true);
@@ -64,6 +83,21 @@
     if (el.isCompleted) {
       toggleCompletedClass(item);
     }
+    /* Dragging functionality */
+    item.addEventListener("dragstart", (e) => {
+      e.target.classList.add("dragging");
+    });
+    item.addEventListener("dragend", (e) => {
+      const container = e.target.parentElement;
+      const elBefore = getElementBefore(container, e.clientY);
+      /* Place dragging element before founded todo */
+      if (elBefore !== undefined) {
+        container.insertBefore(e.target, elBefore);
+        /* When no element before place dragging element at the end of list */
+      } else {
+        container.appendChild(e.target);
+      }
+    });
     return item;
   }
 
@@ -90,6 +124,7 @@
     updateCount();
     applayFilter();
     e.target.children[1].value = "";
+    saveState();
   }
 
   /* Toggle completed */
@@ -102,12 +137,13 @@
         let itemIndex = todoListArray.findIndex((todo) => {
           return todo.id === current.dataset.id;
         });
-        todoListArray[itemIndex].isCompleted = !todoListArray[itemIndex]
-          .isCompleted;
+        todoListArray[itemIndex].isCompleted =
+          !todoListArray[itemIndex].isCompleted;
         applayFilter();
       }
     });
     updateCount();
+    saveState();
   }
 
   /* Handle Click on item Complete btn and remove btn */
@@ -128,6 +164,7 @@
         }
       });
       updateCount();
+      saveState();
     }
   }
 
@@ -141,10 +178,11 @@
 
   /* Clear completed functionality */
   function handleClearCompleted() {
-    Array.from(
-      document.querySelectorAll(".todo-list__item.completed")
-    ).forEach((el) => el.remove());
+    Array.from(document.querySelectorAll(".todo-list__item.completed")).forEach(
+      (el) => el.remove()
+    );
     todoListArray = todoListArray.filter((todo) => !todo.isCompleted);
+    saveState();
   }
 
   /* Applay filter */
@@ -187,8 +225,23 @@
     }
   }
 
+  /* Save state in Loncal Storage */
+  function saveState() {
+    localStorage.setItem("todoListArray", JSON.stringify(todoListArray));
+    localStorage.setItem("appliedFilter", JSON.stringify(appliedFilter));
+  }
+
+  /* Populate state */
+  function populateState() {
+    const itemsArray = localStorage.getItem("todoListArray");
+    if (itemsArray) {
+      todoListArray = JSON.parse(itemsArray);
+    }
+  }
+
   /* Initialization */
   window.onload = function () {
+    populateState();
     todoList.replaceChild(
       createListItems(todoListArray),
       initialItem
@@ -209,4 +262,5 @@
   filterAll.addEventListener("click", handleFilter);
   filterActive.addEventListener("click", handleFilter);
   filterCompleted.addEventListener("click", handleFilter);
+  /* Dragging todos */
 })();
