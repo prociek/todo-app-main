@@ -128,20 +128,31 @@ body {
   color: var(--text-color);
 }
 .todo-form__input::placeholder {
+  color: var(--text-color-disable);
   font-size: 1.2rem;
 }
-.todo-form__btn-submit {
+.todo-form .border {
   position: absolute;
   top: 50%;
   left: 1.5rem;
   transform: translateY(-50%);
+}
+.todo-form__btn-submit {
+  background-color: var(--background-elements);
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  border: 1px solid var(--border-color);
   cursor: pointer;
 }
 /* Media queries */
+@media screen and (min-width: 768px) {
+  .todo-form__input {
+    font-size: 1.6rem;
+  }
+  .todo-form__input::placeholder {
+    font-size: 1.6rem;
+  }
+}
 @media screen and (min-width: 1024px) {
   .todo-form__input {
     padding: 2.4rem 2.4rem 2.4rem 7.3rem;
@@ -172,12 +183,25 @@ body {
   padding: 1.6rem;
   border-bottom: 1px solid var(--border-color);
 }
+.border {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
+  background-color: var(--border-color);
+}
+.border:hover {
+  background-color: transparent;
+  background-image: var(--primary-gradient);
+}
 .todo-list__btn-check {
   width: 2rem;
   height: 2rem;
-  margin-right: 1.6rem;
   border-radius: 50%;
-  border: 1px solid var(--border-color);
+  background-color: var(--background-elements);
   cursor: pointer;
 }
 .todo-list__btn-check svg {
@@ -209,6 +233,11 @@ body {
   fill: var(--text-color);
 }
 /* Media queries */
+@media screen and (min-width: 768px) {
+  .todo-list__text {
+    font-size: 1.6rem;
+  }
+}
 @media screen and (min-width: 1024px) {
   .todo-list {
     margin-top: 2rem;

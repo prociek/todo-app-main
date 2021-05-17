@@ -33,8 +33,10 @@
     </header>
     <main class="main">
       <form class="todo-form">
-        <button class="todo-form__btn-submit" type="submit"></button
-        ><input
+        <div class="border">
+          <button class="todo-form__btn-submit" type="submit"></button>
+        </div>
+        <input
           class="todo-form__input"
           placeholder="Create a new todo..."
           type="text"
@@ -42,16 +44,18 @@
       </form>
       <ul class="todo-list">
         <li class="todo-list__item" draggable="true">
-          <button class="todo-list__btn-check">
-            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
-              <path
-                fill="none"
-                stroke="#FFF"
-                stroke-width="2"
-                d="M1 4.304L3.696 7l6-6"
-              />
-            </svg>
-          </button>
+          <div class="border">
+            <button class="todo-list__btn-check">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+                <path
+                  fill="none"
+                  stroke="#FFF"
+                  stroke-width="2"
+                  d="M1 4.304L3.696 7l6-6"
+                />
+              </svg>
+            </button>
+          </div>
           <p class="todo-list__text"></p>
           <button class="todo-list__btn-remove">
             <svg
