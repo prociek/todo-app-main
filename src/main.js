@@ -1,3 +1,6 @@
+import sunIcon from "./images/icon-sun.svg";
+import moonIcon from "./images/icon-moon.svg";
+
 (() => {
   /* GRABING ALL ELEMENTS INTO VARIABLES */
   const toggleModeBtn = document.querySelector(".header__button");
@@ -35,14 +38,12 @@
   function toggleMode() {
     if (!document.documentElement.hasAttribute("data-theme")) {
       document.documentElement.setAttribute("data-theme", "dark");
-      toggleModeBtn
-        .querySelector(".header__icon")
-        .setAttribute("src", "./images/icon-sun.svg");
+      toggleModeBtn.querySelector(".header__icon").setAttribute("src", sunIcon);
     } else {
       document.documentElement.removeAttribute("data-theme");
       toggleModeBtn
         .querySelector(".header__icon")
-        .setAttribute("src", "./images/icon-moon.svg");
+        .setAttribute("src", moonIcon);
     }
   }
 
