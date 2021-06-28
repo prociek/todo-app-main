@@ -245,10 +245,13 @@ body {
   .todo-list__item {
     padding: 2rem 2.4rem;
   }
+  .border {
+    width: 2.9rem;
+    height: 2.9rem;
+  }
   .todo-list__btn-check {
     width: 2.5rem;
     height: 2.5rem;
-    margin-right: 2.4rem;
   }
   .todo-list__text {
     font-size: 1.8rem;
