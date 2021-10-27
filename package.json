@@ -11,7 +11,9 @@
     "start": "parcel src/index.html",
     "build-prod": "parcel build src/index.html"
   },
-  "dependencies": {},
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
     "sass": "^1.35.1",
