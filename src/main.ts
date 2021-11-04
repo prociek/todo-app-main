@@ -4,26 +4,28 @@ import sunIcon from "./images/icon-sun.svg";
 import moonIcon from "./images/icon-moon.svg";
 
 class ToggleMode {
-  button: HTMLButtonElement;
-  image: HTMLImageElement;
-  sunIcon: string;
-  moonIcon: string;
+  private button: HTMLButtonElement;
+  private image: HTMLImageElement;
+  private sunIcon: string;
+  private moonIcon: string;
 
   constructor(sunIcon: string, moonIcon: string) {
     this.button = document.querySelector(
       ".header__button"
     ) as HTMLButtonElement;
-    this.image = this.button.querySelector(".header__icon") as HTMLImageElement;
+    this.image = this.button.querySelector(
+      ".header__icon"
+    )! as HTMLImageElement;
     this.sunIcon = sunIcon;
     this.moonIcon = moonIcon;
     this.config();
   }
 
-  config() {
+  private config() {
     this.button.addEventListener("click", this.handleClick);
   }
 
-  handleClick = () => {
+  private handleClick = () => {
     if (!document.documentElement.hasAttribute("data-theme")) {
       document.documentElement.setAttribute("data-theme", "dark");
       this.image.setAttribute("src", this.sunIcon);
@@ -35,24 +37,25 @@ class ToggleMode {
 }
 
 class TodoForm {
-  form: HTMLFormElement;
-  input: HTMLInputElement;
+  private form: HTMLFormElement;
+  private input: HTMLInputElement;
 
   constructor() {
-    this.form = document.querySelector(".todo-form") as HTMLFormElement;
-    this.input = this.form.querySelector("input") as HTMLInputElement;
+    this.form = document.querySelector(".todo-form")! as HTMLFormElement;
+    this.input = this.form.querySelector("input")! as HTMLInputElement;
     this.config();
   }
 
-  config() {
+  private config() {
     this.form.addEventListener("submit", this.addTodo);
   }
 
-  addTodo = (e) => {
+  private addTodo = (e) => {
     e.preventDefault();
     // Add todo to state
     const text = this.input.value;
     state.addTodo({ id: uuid(), text, completed: false });
+    this.input.value = "";
   };
 }
 
@@ -90,6 +93,51 @@ class TodosState {
   }
 }
 
+class TodoItem {
+  private template: HTMLTemplateElement;
+  private hostEl: HTMLUListElement;
+  private element: HTMLLIElement;
+  private todo: Todo;
+
+  constructor(hostId: string, todo: Todo) {
+    this.hostEl = document.getElementById(hostId)! as HTMLUListElement;
+    this.template = document.getElementById(
+      "todo-item"
+    )! as HTMLTemplateElement;
+    const node = document.importNode(this.template, true);
+    this.element = node.content.firstElementChild as HTMLLIElement;
+    this.todo = todo;
+    this.configure();
+    this.render();
+  }
+
+  configure() {
+    this.element.querySelector(".todo-list__text").textContent = this.todo.text;
+  }
+
+  render() {
+    this.hostEl.appendChild(this.element);
+  }
+}
+
+class TodoList {
+  private list: HTMLUListElement;
+
+  constructor() {
+    this.list = document.getElementById("todo-list")! as HTMLUListElement;
+    this.addTodo = this.addTodo.bind(this);
+    state.subscibeListener(this.addTodo);
+  }
+
+  addTodo(todos: Todo[]) {
+    this.list.innerHTML = "";
+    todos.forEach((todo) => {
+      new TodoItem("todo-list", todo);
+    });
+  }
+}
+
+const state = TodosState.getInstance();
 new ToggleMode(sunIcon, moonIcon);
 new TodoForm();
-const state = TodosState.getInstance();
+new TodoList();
