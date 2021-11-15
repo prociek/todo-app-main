@@ -5,7 +5,10 @@ class TodosState {
   private listeners: Listener[] = [];
   private todos: Todo[] = [];
 
-  private constructor() {}
+  private constructor() {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    if (todos) this.todos = todos;
+  }
 
   public static getInstance(): TodosState {
     if (!TodosState.instance) {
@@ -14,12 +17,17 @@ class TodosState {
     return TodosState.instance;
   }
 
+  public getTodos() {
+    return [...this.todos];
+  }
+
   public subscibeListener(listener: Listener) {
     this.listeners.push(listener);
   }
 
   public addTodo(todo: Todo) {
     this.todos.push(todo);
+    this.syncLocalStorage();
     this.runListeners();
   }
 
@@ -29,16 +37,19 @@ class TodosState {
         todo.completed = !todo.completed;
       }
     });
+    this.syncLocalStorage();
     this.runListeners();
   }
 
   public removeTodo(id: string) {
     this.todos = this.todos.filter((todo) => todo.id !== id);
+    this.syncLocalStorage();
     this.runListeners();
   }
 
   public clearCompleted() {
     this.todos = this.todos.filter((todo) => !todo.completed);
+    this.syncLocalStorage();
     this.runListeners();
   }
 
@@ -46,6 +57,10 @@ class TodosState {
     for (let listener of this.listeners) {
       listener(this.todos);
     }
+  }
+
+  private syncLocalStorage() {
+    localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 }
 

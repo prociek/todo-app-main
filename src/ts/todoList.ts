@@ -22,9 +22,10 @@ export default class TodoList {
     )! as HTMLButtonElement;
 
     this.filter = "all";
-    this.todos = [];
+    this.todos = state.getTodos();
 
     this.config();
+    this.renderTodos();
   }
 
   config() {
