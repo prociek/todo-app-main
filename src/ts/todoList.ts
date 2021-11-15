@@ -1,6 +1,7 @@
 import { Todo } from "./types";
 import state from "./todoState";
 import TodoItem from "./todoItem";
+import Sortable from "sortablejs";
 
 export default class TodoList {
   private list: HTMLUListElement;
@@ -26,6 +27,12 @@ export default class TodoList {
 
     this.config();
     this.renderTodos();
+    new Sortable(this.list, {
+      onEnd: function (e) {
+        state.changePosition(e.oldIndex, e.newIndex);
+      },
+      animation: 250,
+    });
   }
 
   config() {

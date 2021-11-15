@@ -53,6 +53,12 @@ class TodosState {
     this.runListeners();
   }
 
+  public changePosition(oldIdx, newIdx) {
+    const dragged = this.todos.splice(oldIdx, 1)[0];
+    this.todos.splice(newIdx, 0, dragged);
+    this.syncLocalStorage();
+  }
+
   private runListeners() {
     for (let listener of this.listeners) {
       listener(this.todos);
