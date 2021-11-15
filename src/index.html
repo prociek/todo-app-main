@@ -41,13 +41,19 @@
       </form>
       <ul class="todo-list" id="todo-list"></ul>
       <div class="todo-menu" role="menu">
-        <div class="todo-menu__itms-left">
-          <span id="amount">0</span> items left
-        </div>
+        <div class="todo-menu__itms-left"><span id="amount">0</span> left</div>
         <div class="todo-menu__filter">
-          <button id="select-all" class="btn-select active">All</button
-          ><button id="select-active" class="btn-select">Active</button
-          ><button id="select-completed" class="btn-select">Completed</button>
+          <button id="select-all" class="btn-select active" data-filter="all">
+            All</button
+          ><button id="select-active" class="btn-select" data-filter="active">
+            Active</button
+          ><button
+            id="select-completed"
+            class="btn-select"
+            data-filter="completed"
+          >
+            Completed
+          </button>
         </div>
         <button id="clear-completed">Clear Completed</button>
       </div>
@@ -73,7 +79,7 @@
             </svg>
           </button>
         </div>
-        <p class="todo-list__text">Todo</p>
+        <p class="todo-list__text"></p>
         <button class="todo-list__btn-remove">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -37,6 +37,11 @@ class TodosState {
     this.runListeners();
   }
 
+  public clearCompleted() {
+    this.todos = this.todos.filter((todo) => !todo.completed);
+    this.runListeners();
+  }
+
   private runListeners() {
     for (let listener of this.listeners) {
       listener(this.todos);
