@@ -1,0 +1,58 @@
+.main {
+  width: 90%;
+  max-width: 54rem;
+  margin: 0 auto;
+}
+.todo-form {
+  position: relative;
+}
+.todo-form__input {
+  width: 100%;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 1.6rem 1.6rem 1.6rem 5rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+  background-color: var(--background-elements);
+  color: var(--text-color);
+}
+.todo-form__input::placeholder {
+  color: var(--text-color-disable);
+  font-size: 1.2rem;
+}
+.todo-form .border {
+  position: absolute;
+  top: 50%;
+  left: 1.5rem;
+  transform: translateY(-50%);
+}
+.todo-form__btn-submit {
+  background-color: var(--background-elements);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* Media queries */
+@media screen and (min-width: 768px) {
+  .todo-form__input {
+    font-size: 1.6rem;
+  }
+  .todo-form__input::placeholder {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .todo-form__input {
+    padding: 2.4rem 2.4rem 2.4rem 7.3rem;
+    font-size: 1.8rem;
+  }
+  .todo-form__input::placeholder {
+    font-size: 1.8rem;
+  }
+  .todo-form__btn-submit {
+    left: 2.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
