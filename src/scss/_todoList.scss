@@ -1,0 +1,100 @@
+.todo-list {
+  margin-top: 1.6rem;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+.todo-list__item {
+  width: 100%;
+  background-color: var(--background-elements);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.border {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
+  background-color: var(--border-color);
+}
+.border:hover {
+  background-color: transparent;
+  background-image: var(--primary-gradient);
+}
+.todo-list__btn-check {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--background-elements);
+  cursor: pointer;
+}
+.todo-list__btn-check svg {
+  display: none;
+  margin: auto;
+}
+.todo-list__item.checked .todo-list__btn-check {
+  background-image: var(--primary-gradient);
+  border: none;
+}
+.todo-list__item.checked .todo-list__btn-check svg {
+  display: block;
+}
+.todo-list__text {
+  margin-right: auto;
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+.todo-list__item.completed .todo-list__text {
+  text-decoration: line-through;
+  color: var(--text-color-disable);
+}
+.todo-list__btn-remove {
+  cursor: pointer;
+}
+.todo-list__btn-remove svg {
+  height: 1.2rem;
+  fill: var(--text-color);
+}
+/* Media queries */
+@media screen and (min-width: 768px) {
+  .todo-list__text {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .todo-list {
+    margin-top: 2rem;
+  }
+  .todo-list__item {
+    padding: 2rem 2.4rem;
+  }
+  .border {
+    width: 2.9rem;
+    height: 2.9rem;
+  }
+  .todo-list__btn-check {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .todo-list__text {
+    font-size: 1.8rem;
+  }
+  .todo-list__btn-remove {
+    opacity: 0;
+    transition: opacity 300ms ease-in 100ms;
+    visibility: hidden;
+  }
+  .todo-list__item:hover .todo-list__btn-remove {
+    visibility: visible;
+    opacity: 1;
+  }
+  .todo-list__btn-remove svg {
+    height: 2rem;
+  }
+}

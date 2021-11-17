@@ -1,0 +1,30 @@
+.header {
+  width: 90%;
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 4.2rem 0 3.2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__heading {
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  color: hsl(230, 37%, 97%);
+}
+.header__icon {
+  height: 2rem;
+}
+/* Media queries */
+@media screen and (min-width: 1024px) {
+  .header {
+    padding: 7rem 0 4rem 0;
+  }
+  .header__heading {
+    font-size: 4rem;
+    letter-spacing: 14px;
+  }
+  .header__icon {
+    height: 2.5rem;
+  }
+}

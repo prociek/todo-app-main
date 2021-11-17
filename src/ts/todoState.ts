@@ -10,6 +10,16 @@ class TodosState {
     if (todos) this.todos = todos;
   }
 
+  private runListeners() {
+    for (let listener of this.listeners) {
+      listener(this.todos);
+    }
+  }
+
+  private syncLocalStorage() {
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+  }
+
   public static getInstance(): TodosState {
     if (!TodosState.instance) {
       TodosState.instance = new TodosState();
@@ -57,16 +67,6 @@ class TodosState {
     const dragged = this.todos.splice(oldIdx, 1)[0];
     this.todos.splice(newIdx, 0, dragged);
     this.syncLocalStorage();
-  }
-
-  private runListeners() {
-    for (let listener of this.listeners) {
-      listener(this.todos);
-    }
-  }
-
-  private syncLocalStorage() {
-    localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 }
 

@@ -12,12 +12,11 @@ export default class TodoForm {
   }
 
   private config() {
-    this.form.addEventListener("submit", this.addTodo);
+    this.form.addEventListener("submit", this.addTodoHandler);
   }
 
-  private addTodo = (e) => {
+  private addTodoHandler = (e) => {
     e.preventDefault();
-    // Add todo to state
     const text = this.input.value.trim();
     if (!text) return;
     state.addTodo({ id: uuid(), text, completed: false });
